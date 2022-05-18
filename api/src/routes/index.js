@@ -3,7 +3,7 @@ const { Router, response } = require('express');
 const router = Router();
 
 const recipes = require('./recipes.js');
-const typesDiet = require('./typesDiet.js');
+const typesDiet = require('./typesDiets.js');
 const suggest = require('./suggest');
 
 // Configurar los routers

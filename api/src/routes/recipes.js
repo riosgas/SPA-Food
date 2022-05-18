@@ -40,11 +40,22 @@ router.get('/:id', async (req, res, next) => {
     }
 })
 
-// [ ] POST /recipe:
-// Recibe los datos recolectados desde el formulario controlado de la ruta de creación de recetas por body
-// Crea una receta en la base de datos
 router.post('/', async (req, res, next) => {
-    
+    const { title, image, summary, diets, score, healthScore, instructions } = req.body;
+    try {
+        let recipe = await Recipe.create({
+            title,
+            image,
+            summary,
+            diets,
+            score,
+            healthScore,
+            instructions
+        });
+        res.send('Recipe created');
+    } catch (error) {
+        next(error)
+    }
 })
 
 

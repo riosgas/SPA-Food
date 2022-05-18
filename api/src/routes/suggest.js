@@ -9,7 +9,7 @@ const sugg =require ('./suggest.json');
 
 
 router.get('/', async (req, res, next) => {
-    let diet = ['gluten free','ketogenic','lacto ovo vegetarian','paleo','vegan'];
+    let diet = ['gluten free','ketogenic','paleo','vegan','lacto ovo vegetarian'];
     let meal = ['main course','appetizer','breakfast','dessert','snack'];
     // //let sugg = [];
     // // for (let i = 0; i < meal.length; i++) {
@@ -46,10 +46,10 @@ router.get('/', async (req, res, next) => {
         //     order: [
         //         Sequelize.fn( 'RAND' ),
         //     ]
-        // });
+        // }); 
         let info = await Suggest.findAll({
             where: {
-                diet: diet[Math.floor(Math.random()*5)],
+                diet: diet[Math.floor(Math.random()*4)],
                 meal: meal[Math.floor(Math.random()*4)]
             }
         })
