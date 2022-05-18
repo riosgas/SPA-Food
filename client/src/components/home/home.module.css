@@ -1,0 +1,27 @@
+.container{
+    background-color: #F1F2F2;
+    display: grid;
+    height: 100vh;
+    grid-template-columns: 300px auto ;
+    
+}
+
+.nav{
+    background-color: lightgrey;
+    
+}
+
+.content{
+    background-color: #27c6c6;
+    gap: 30px;
+}
+
+@media screen and (max-width: 1580px) {
+    .container{
+        display: grid;
+        /* width: 100vh; */
+        grid-template-columns: auto ;
+        grid-template-rows: 100px auto ;
+        
+    }
+}

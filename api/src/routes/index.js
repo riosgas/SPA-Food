@@ -9,7 +9,7 @@ const suggest = require('./suggest');
 // Configurar los routers
 router.use('/recipes', recipes);
 router.use('/types', typesDiet);
-router.use('/suggest', suggest);
+router.use('/suggestions', suggest);
 
 
 module.exports = router;

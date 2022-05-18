@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import style from "./landingPage.module.css"
 
 export default function LandingPage() {
-  let stateDark = false;
+  let stateDark = true;
 
   let modo = (value) => stateDark ? style[value+'D'] : style[value]
 

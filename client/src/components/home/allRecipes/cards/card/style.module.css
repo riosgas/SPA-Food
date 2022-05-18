@@ -1,0 +1,50 @@
+.container{
+    /* box-sizing: border-box; */
+    background-color: rgb(222, 222, 222);
+    display: grid;
+    grid-template-columns: 29rem 1fr;
+    grid-template-rows: 15rem 7rem;
+    grid-template-areas: 
+    "i d"
+    "t t";
+    border-radius: 1.5rem;
+    overflow: auto;
+    cursor: pointer;
+    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+    position: relative;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    transition: all 0.3s ease-out;
+    text-decoration: none;
+}
+.img{
+    /* background-color: rgb(238, 213, 144); */
+    grid-area: i;
+    width: 100%;
+    height: 15rem;
+    object-fit: cover;
+}
+.diets{
+    /* background-color: rgb(222, 189, 255); */
+    grid-area: d;
+    font-size: 1.4rem;
+}
+.title{
+    background-color: rgb(235, 229, 213);
+    grid-area: t;
+    font-size: 2rem;
+    padding: 0.1rem;
+    text-align: center;
+    display: grid;
+    /* grid-auto-flow: column; */
+    grid-template-columns: auto;
+    justify-content: center;
+    align-content: center;
+    box-shadow: 0 -1px 8px 1px rgba(0,0,0,0.03);
+}
+.container:hover{
+    /* box-shadow: 0 0 11px 0 rgba(0, 0, 0, 0.22), 
+    0 0 22px 0 rgba(0, 0, 0, 0.19); */
+    transform: translateY(-5px) scale(1.005) translateZ(0);
+    box-shadow: 0 20px 36px rgba(0,0,0,0.2),
+      0 24px 36px rgba(0, 0, 0, 0.15);
+}

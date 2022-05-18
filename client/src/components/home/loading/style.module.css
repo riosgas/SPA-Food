@@ -1,0 +1,10 @@
+.container{
+    background-color: rgb(215, 148, 148);
+    display: grid;
+    font-size: 3rem;
+    text-align: center;
+
+    grid-row: 2;
+    align-content: space-around;
+    height: 1fr;
+}

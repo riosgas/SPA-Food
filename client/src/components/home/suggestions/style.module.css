@@ -1,0 +1,21 @@
+.container{
+    display: grid;
+    grid-template-columns: minmax(570px, 1550px);
+    grid-template-rows: 50px auto 50px auto;
+    padding: 4rem;
+    padding-top: 2rem;
+    grid-gap: 2rem;
+    justify-self: center;
+    height: 1vh;
+}
+.title{
+    font-size: 4rem;
+    color: rgb(76, 76, 76);
+}
+.loader {
+    height: 1fr;
+}
+.contDietsCards{}
+.dietCard{}
+.contSuggCards{}
+.suggCard{}

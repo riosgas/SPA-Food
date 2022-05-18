@@ -11,13 +11,21 @@ module.exports = (sequelize) => {
       primaryKey: true,
       allowNull: false
     },
-    name: {
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    image: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     summary: {
       type: DataTypes.TEXT,
       allowNull: false,
+    },
+    diet: {
+      type: DataTypes.STRING
+      
     },
     score: {
       type: DataTypes.FLOAT

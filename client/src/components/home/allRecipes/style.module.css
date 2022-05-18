@@ -1,0 +1,19 @@
+.container{
+    display: grid;
+    grid-template-columns: minmax(570px, 1550px);
+    grid-template-rows: 50px auto 50px;
+    padding: 4rem;
+    padding-top: 2rem;
+    grid-gap: 2rem;
+    justify-self: center;
+    height: 1vh;
+}
+.query{
+    /* background-color: rgb(155, 219, 219); */
+    font-size: 4rem;
+    color: rgb(76, 76, 76);
+    /* text-shadow: 0 0.7rem 1.2rem rgba(0,0,0,0.38) */
+}
+.loader {
+    height: 1fr;
+}
