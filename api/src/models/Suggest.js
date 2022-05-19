@@ -21,5 +21,8 @@ module.exports = (sequelize) => {
     diet: {
       type: DataTypes.STRING
     }
+  },
+  {
+    timestamps: false
   });
 };

@@ -1,17 +1,29 @@
 import axios from 'axios';
-export const CREATE_RECIPE = 'CREATE_RECIPE';
-export const GET_RECIPE_ID = 'GET_RECIPE_ID';
-export const GET_RECIPES_QUERY = 'GET_RECIPES_QUERY';
-export const GET_RECIPES = 'GET_RECIPES';
-export const GET_SUGGESTIONS = 'GET_SUGGESTIONS';
 export const GET_DIETS = 'GET_DIETS';
+export const GET_DIETS_RECIPES = 'GET_DIETS_RECIPES';
+export const GET_RECIPES = 'GET_RECIPES';
+export const GET_RECIPES_QUERY = 'GET_RECIPES_QUERY';
+export const GET_DETAILS = 'GET_DETAILS';
+export const GET_SUGGESTIONS = 'GET_SUGGESTIONS';
+export const CREATE_RECIPE = 'CREATE_RECIPE';
 
-export function createRecipe() {
-    
-};
-export function getRecipeId(id) { //details
-
-};
+export function getDiets(query) {
+    return function (dispatch){
+        if (!query){
+            axios.get('http://localhost:3001/types/')
+                .then(response => {
+                    return dispatch({ type: GET_DIETS, payload: response.data });
+                })
+                .catch(error => console.log(error));
+        } else {
+            axios.get(`http://localhost:3001/types/${query}`)
+                .then(response => {
+                    return dispatch({ type: GET_DIETS_RECIPES, payload: {query: query, data:response.data}});
+                })
+                .catch(error => console.log(error));
+        }
+    }
+}
 export function getRecipes(query){
     return function (dispatch) {
         if (!query) {
@@ -22,19 +34,19 @@ export function getRecipes(query){
                 .catch(error => console.log(error));
         }
         else {
-            axios.get(`/recipes?name=${query}`)
+            axios.get(`http://localhost:3001/recipes?name=${query}`)
                 .then(response => {
-                    return dispatch({ type: GET_RECIPES_QUERY, payload: response.data })
+                    return dispatch({ type: GET_RECIPES_QUERY, payload: {query: query, data:response.data}})
                 })
                 .catch(error => console.log(error));
         }
     }
 }
-export function getDiets() {
+export function getDetails(id) {
     return function (dispatch){
-        axios.get('http://localhost:3001/types/')
+        axios.get(`http://localhost:3001/recipes/${id}`)
             .then(response => {
-                return dispatch({ type: GET_DIETS, payload: response.data });
+                return dispatch({ type: GET_DETAILS, payload: response.data });
             })
             .catch(error => console.log(error));
     }
@@ -49,3 +61,7 @@ export function getSuggestions() {
     }
 
 }
+
+export function createRecipe() {
+    
+};

@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const router = Router();
 const { Suggest } = require('../db.js');
-const sugg =require ('./suggest.json');
+const sugg =require ('./ok.json');
 
 // const axios = require ('axios');
 // require('dotenv').config();
@@ -9,7 +9,7 @@ const sugg =require ('./suggest.json');
 
 
 router.get('/', async (req, res, next) => {
-    let diet = ['gluten free','ketogenic','paleo','vegan','lacto ovo vegetarian'];
+    let diet = ['gluten free','ketogenic','paleo','lacto ovo vegetarian','vegan'];
     let meal = ['main course','appetizer','breakfast','dessert','snack'];
     // //let sugg = [];
     // // for (let i = 0; i < meal.length; i++) {
@@ -30,8 +30,20 @@ router.get('/', async (req, res, next) => {
     // })
     // return res.send(suggest)
     try {
-        sugg.forEach(s => {
-            Suggest.findOrCreate({
+        // sugg.forEach(async s => {
+        //     await Suggest.findOrCreate({
+        //         where: {id: s.id},
+        //         defaults: {
+        //             id: s.id,
+        //             title: s.title,
+        //             image: s.image,
+        //             meal: s.meal,
+        //             diet: s.diet
+        //         }
+        //     });
+        // });
+        let prome = sugg.map( s => {
+             Suggest.findOrCreate({
                 where: {id: s.id},
                 defaults: {
                     id: s.id,
@@ -42,17 +54,22 @@ router.get('/', async (req, res, next) => {
                 }
             });
         });
+        await Promise.all(prome);
+
         // Model.find({
         //     order: [
         //         Sequelize.fn( 'RAND' ),
         //     ]
         // }); 
+        let dR = diet[Math.floor(Math.random()*4)];
+        let mR = meal[Math.floor(Math.random()*4)]
         let info = await Suggest.findAll({
             where: {
-                diet: diet[Math.floor(Math.random()*4)],
-                meal: meal[Math.floor(Math.random()*4)]
+                diet: dR,
+                meal: mR
             }
         })
+
         res.json(info);
     }
     catch (error) {

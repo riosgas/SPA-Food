@@ -2,10 +2,10 @@ import React from 'react';
 import { Route, Routes, Navigate } from "react-router-dom";
 //import './App.css';
 
-import LandingPage from './components/landingPage/landingPage.js';
-import Home from "./components/home/home.js";
-import Detail from './components/detail/detail.js';
-import CreateRecipe from './components/createRecipe/createRecipe';
+import LandingPage from './components/landingPage/';
+import Home from "./components/home/";
+import Detail from './components/detail/';
+import CreateRecipe from './components/createRecipe/';
 import Suggestions from './components//home/suggestions';
 
 function App() {
