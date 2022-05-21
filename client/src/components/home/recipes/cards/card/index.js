@@ -1,9 +1,15 @@
 import React from "react";
+import { useNavigate } from "react-router";
 import S from "./style.module.css"
 
 export default function Card({id, image, title, diets}) {
+  let navigate = useNavigate();
+
+  let toDetails = () => {
+    navigate(`/recipe/${id}`)
+  }
   return (
-    <div className={S.container} id={id}>
+    <div className={S.container} onClick={toDetails}>
       <img src={image} alt={title} className={S.img}/>
       <div className={S.title}>
         <p>{title}</p>

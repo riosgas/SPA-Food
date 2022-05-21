@@ -6,7 +6,7 @@ const router = Router();
 router.get('/', async (req, res, next) => {
     let diets = [
         {name: 'dairy free', text: 'Dairy Free', color: '#ffd987'},
-        {name: 'vegan', text: 'Vegan', color: '#8af5a6'},
+        {name: 'vegan', text: 'Vegan', color: '#82eb9e'},
         {name: 'fodmap friendly', text: 'Low FODMAP', color: '#c298cd'},
         {name: 'pescatarian', text: 'Pescetarian', color: '#94bed8'},
         {name: 'paleolithic', text: 'Paleo', color: '#dda8a8'},

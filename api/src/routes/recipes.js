@@ -31,10 +31,12 @@ router.get('/', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
     const reqId = req.params.id;
     try {
-        let {id, title, image, diets, summary, spoonacularScore, healthScore, instructions} = await axios.get(`https://api.spoonacular.com/recipes/${reqId}/information?apiKey=${API_KEY}`)
+        let {id, title, image, dishTypes, readyInMinutes, servings, healthScore, diets, summary, instructions, analyzedInstructions} = await axios.get(`https://api.spoonacular.com/recipes/${reqId}/information?apiKey=${API_KEY}`)
             .then(response => response.data);
         //paso a paso
-        return res.send({id, title, image, diets, summary, spoonacularScore, healthScore, instructions})
+        return res.send({id, title, image, dishTypes, readyInMinutes, servings, healthScore, diets, summary, instructions, analyzedInstructions})
+
+
     } catch (error) {
         next(error)
     }

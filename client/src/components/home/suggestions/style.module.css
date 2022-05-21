@@ -1,7 +1,7 @@
 .container{
     display: grid;
-    grid-template-columns: minmax(570px, 1550px);
-    grid-template-rows: 50px auto 50px auto;
+    grid-template-columns: minmax(57rem, 155rem);
+    grid-template-rows: 5rem auto 7rem auto;
     padding: 4rem;
     padding-top: 2rem;
     grid-gap: 3rem;
@@ -9,10 +9,11 @@
     height: 1vh;
 }
 .title{
-    /* margin-top: 5rem; */
-    height: 6rem;
     font-size: 4rem;
     color: rgb(76, 76, 76);
+    /* display: grid; */
+    align-self: end;
+    /* background-color: aqua; */
 }
 .loader {
     height: 1fr;
@@ -99,13 +100,4 @@
     display: grid;
     align-content: center;
     justify-content: center;
-}
-.a {
-    color: #ffd987;
-    color: #d6a879;
-    color: #c298cd;
-    color: #94bed8;
-    color: #8af5a6;
-    color: #7fbd76;
-    color: #dda8a8;
 }

@@ -1,4 +1,5 @@
 import {React, useEffect} from "react";
+import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from 'react-redux';
 import { getSuggestions, getDiets } from '../../../redux/actions';
 import S from "./style.module.css"
@@ -8,18 +9,22 @@ export default function Suggestions() {
   let dispatch = useDispatch();
   let suggestions = useSelector((state) => state.suggestions);
   let diets = useSelector((state) => state.diets)
+  let navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getSuggestions());
     //dispatch(getDiets())
   },[]);
-  
+  let toDetails = (id) => {
+    navigate(`/recipe/${id}`)
+  }
+
   const SuggestionCards = ({recipes}) =>{
     return(
       <div className={S.contSuggCards}>
         {
           recipes.map((e,i)=>(
-            <div key={i} id={e.i} className={S.suggCard}>
+            <div key={i} id={e.i} className={S.suggCard} onClick={()=>toDetails(e.id)}>
               <img src={e.image}/>
               <p>{e.title}</p>
             </div>

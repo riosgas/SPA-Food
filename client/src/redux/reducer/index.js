@@ -6,7 +6,8 @@ import {
     GET_DETAILS,
     GET_SUGGESTIONS,
     CREATE_RECIPE,
-    CHANGE_PAGE
+    CHANGE_PAGE,
+    CLEAN_DETAILS
 } from'../actions'
 
 const initialState = {
@@ -59,13 +60,15 @@ const rootReducer = (state = initialState, action) => {
                 }
             }
         case GET_DETAILS:
+            return {
+                ...state,
+                details: action.payload
+            }
         case GET_SUGGESTIONS:
             return {
                 ...state,
                 suggestions: action.payload
             }
-        case CREATE_RECIPE:
-            return{}
         case CHANGE_PAGE:
             return {
                 ...state, home : {
@@ -73,6 +76,11 @@ const rootReducer = (state = initialState, action) => {
                     suggest: action.payload,
                     recipes: []
                 }
+            }
+        case CLEAN_DETAILS:
+            return{
+                ...state,
+                details: []
             }
         default:
             return state;
