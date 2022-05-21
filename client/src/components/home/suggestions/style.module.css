@@ -4,18 +4,108 @@
     grid-template-rows: 50px auto 50px auto;
     padding: 4rem;
     padding-top: 2rem;
-    grid-gap: 2rem;
+    grid-gap: 3rem;
     justify-self: center;
     height: 1vh;
 }
 .title{
+    /* margin-top: 5rem; */
+    height: 6rem;
     font-size: 4rem;
     color: rgb(76, 76, 76);
 }
 .loader {
     height: 1fr;
 }
-.contDietsCards{}
-.dietCard{}
-.contSuggCards{}
-.suggCard{}
+.contSuggCards{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(26rem, auto));
+    /* grid-template-columns: repeat(auto-fill, minmax(auto, 36rem)); */
+    /* grid-auto-rows: 130%; */
+    grid-gap: 3rem;
+}
+.suggCard{
+    background-color: rgb(235, 229, 213);
+    display: grid;
+    grid-template-rows: auto auto;
+
+    border-radius: 1.5rem;
+    overflow: auto;
+    cursor: pointer;
+
+    /* position: relative; */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    transition: all 0.3s ease-out;
+}
+.suggCard img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+.suggCard p{
+    /* background-color: rgb(235, 229, 213); */
+    font-size: 2rem;
+    width: 100%;
+    /* padding: 0.1rem; */
+    /* margin: auto; */
+    text-align: center;
+}
+.suggCard:hover{
+    transform: translateY(-5px) scale(1.005) translateZ(0);
+    box-shadow: 0 1.5rem 3rem rgba(0,0,0,0.2),
+      0 2rem 3rem rgba(0, 0, 0, 0.15);
+}
+
+.contDietsCards{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    grid-auto-rows: 1fr;
+    grid-gap: 2rem;
+}
+.contDietsCards::before {
+    content: '';
+    width: 0;
+    padding-bottom: 100%;
+    grid-row: 1 / 1;
+    grid-column: 1 / 1;
+}
+.contDietsCards > *:first-child {
+    grid-row: 1 / 1;
+    grid-column: 1 / 1;
+}
+.dietCard{
+    border-radius: 100%;
+    overflow: auto;
+    cursor: pointer;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    transition: all 500ms;
+    filter: saturate(60%);
+}
+.dietCard:hover{
+    filter: saturate(130%);
+    transform: scale(1.08);
+}
+.dietCard h1{
+    font-size: 2.2rem;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.3);
+    width: 80%;
+    height: 80%;
+    border-radius: 100%;
+    display: grid;
+    align-content: center;
+    justify-content: center;
+}
+.a {
+    color: #ffd987;
+    color: #d6a879;
+    color: #c298cd;
+    color: #94bed8;
+    color: #8af5a6;
+    color: #7fbd76;
+    color: #dda8a8;
+}

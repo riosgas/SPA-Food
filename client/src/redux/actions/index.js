@@ -6,6 +6,7 @@ export const GET_RECIPES_QUERY = 'GET_RECIPES_QUERY';
 export const GET_DETAILS = 'GET_DETAILS';
 export const GET_SUGGESTIONS = 'GET_SUGGESTIONS';
 export const CREATE_RECIPE = 'CREATE_RECIPE';
+export const CHANGE_PAGE = 'CHANGE_PAGE';
 
 export function getDiets(query) {
     return function (dispatch){
@@ -64,4 +65,9 @@ export function getSuggestions() {
 
 export function createRecipe() {
     
-};
+}
+export function changePage(value) {
+    return function (dispatch){
+        return dispatch({ type: CHANGE_PAGE, payload: value })
+    }
+}

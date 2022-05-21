@@ -1,17 +1,18 @@
 import { React, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { getRecipes } from '../../../redux/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { changePage } from '../../redux/actions';
 import S from "./style.module.css"
-import logo from "../../../images/logo2.jpg";
+import logo from "../../images/logo.svg";
 
 export default function Nav() {
   let [seeAll, setSeeAll] = useState(false);
+  let suggestPage = useSelector(state=>state.home.suggest)
 
   let dispatch = useDispatch();
 
-  function click(e) {
-    //dispatch(getRecipes());
-    seeAll ? setSeeAll(false) : setSeeAll(true);
+  function click() {
+    suggestPage ? dispatch(changePage(false)) : dispatch(changePage(true));
+    //seeAll ? setSeeAll(false) : setSeeAll(true);
   }
 
   return (

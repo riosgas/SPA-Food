@@ -24,7 +24,7 @@
     align-content: space-around;
 }
 .pag:hover{
-    background-color: #ebd593;
+    background-color: #dfc7a3;
 }
 .pagSelect{
     font-size: 2rem;
@@ -32,7 +32,7 @@
     width: 1.5em;
     height: 1.5em;
     padding: .2em;
-    background-color: #e9cb77;
+    background-color: #dfba81;
     border-radius: 100%;
     cursor: default;
     list-style-type: none;

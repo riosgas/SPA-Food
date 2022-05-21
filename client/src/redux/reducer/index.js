@@ -5,24 +5,23 @@ import {
     GET_RECIPES_QUERY,
     GET_DETAILS,
     GET_SUGGESTIONS,
-    CREATE_RECIPE
+    CREATE_RECIPE,
+    CHANGE_PAGE
 } from'../actions'
 
 const initialState = {
     details:{},
     diets: [],
     home:{
-        suggest: true
-    },
-    recipes:{
+        suggest: true,
         currentPage: 1,
         query: '',
-        recipes: [],
-        sort:{
-            score:'',
-            alpha:'',
-            diet:''
-        }
+        recipes: []
+    },
+    sort:{
+        score:'',
+        alpha:'',
+        diet:''
     },
     suggestions:[]
 };
@@ -37,20 +36,27 @@ const rootReducer = (state = initialState, action) => {
             }
         case GET_DIETS_RECIPES:
             return{
-                ...state.recipes,
-                query: action.payload.query,
-                recipes: action.payload.data
+                ...state, home : {
+                    ...state.home,
+                    query: action.payload.query,
+                    recipes: action.payload.data
+                }
             }
-        case GET_RECIPES:
+        case GET_RECIPES:////ok
             return {
-                ...state.recipes,
-                recipes: action.payload
+                ...state, home : {
+                    ...state.home,
+                    query: '',
+                    recipes: action.payload
+                }
             }
         case GET_RECIPES_QUERY:
-            return{
-                ...state.recipes,
-                query: action.payload.query,
-                recipes: action.payload.data
+            return {
+                ...state, home : {
+                    ...state.home,
+                    query: action.payload.query,
+                    recipes: action.payload.data
+                }
             }
         case GET_DETAILS:
         case GET_SUGGESTIONS:
@@ -59,7 +65,15 @@ const rootReducer = (state = initialState, action) => {
                 suggestions: action.payload
             }
         case CREATE_RECIPE:
-
+            return{}
+        case CHANGE_PAGE:
+            return {
+                ...state, home : {
+                    ...state.home,
+                    suggest: action.payload,
+                    recipes: []
+                }
+            }
         default:
             return state;
     }

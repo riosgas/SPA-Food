@@ -1,6 +1,6 @@
 import {React, useState, useEffect} from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { getRecipes, getDiets } from '../../../redux/actions';
+import { getRecipes } from '../../../redux/actions';
 import S from "./style.module.css"
 import Cards from "./cards";
 import Pags from "./pags";
@@ -10,15 +10,18 @@ import Loader from "../loading";
 
 export default function AllRecipes() {
   let [currentPage, setCurrentPage] = useState(1);
-  let [loading, setLoading] = useState(true);
+  // let [loading, setLoading] = useState(true);
   let dispatch = useDispatch();
   //let loading = useSelector((state) => state.loading);
-  let recipes = useSelector((state) => state.recipes);
+  let recipes = useSelector((state) => state.home.recipes);
   //let diets = useSelector((state) => state.diets)
 
-  const handlerLoading = () => {
-    loading ? setLoading(false) : setLoading(true)
-  }
+  // const handlerLoading = () => {
+  //   loading ? setLoading(false) : setLoading(true)
+  // }
+  useEffect(()=>{
+    dispatch(getRecipes());
+  },[])
   
   const filteredRecipes = () =>{
     return recipes.slice((currentPage-1)*9,((currentPage-1)*9)+9)
@@ -30,7 +33,6 @@ export default function AllRecipes() {
     <div className={S.container}>
       
         <div className={S.query}>all recipes</div>
-        {/* <Loader /> */}
         {recipes.length > 0 ? <Cards filtered={filteredRecipes()} /> : <Loader className={S.loader}/>}
         <Pags className={S.pages} recipesNumber={recipes.length} currentPage={currentPage} handler={pageChanger}/>
 

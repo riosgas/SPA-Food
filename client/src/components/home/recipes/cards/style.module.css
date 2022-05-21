@@ -1,9 +1,9 @@
 .container{
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(37rem, 1fr));
+    grid-template-rows: repeat(3, 1fr);
     /* grid-auto-rows: 220px; */
     grid-gap: 4rem;
-    grid-template-rows: repeat(3, 1fr);
 }
 
 @media screen and (max-width: 1580px) {

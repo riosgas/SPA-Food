@@ -8,20 +8,26 @@
 
 .nav{
     background-color: lightgrey;
-    
+    grid-column: 1 / 2;
 }
 
 .content{
     background-color: #27c6c6;
-    gap: 30px;
+    gap: 3rem;
+    grid-column: 2 / 3;
 }
 
 @media screen and (max-width: 1580px) {
     .container{
         display: grid;
-        /* width: 100vh; */
         grid-template-columns: auto ;
         grid-template-rows: 100px auto ;
         
+    }
+    .nav {
+        grid-row: 1 / 2;
+    }
+    .nav {
+        grid-row: 2 / 3;
     }
 }

@@ -11,7 +11,7 @@ export default function Suggestions() {
 
   useEffect(() => {
     dispatch(getSuggestions());
-    dispatch(getDiets())
+    //dispatch(getDiets())
   },[]);
   
   const SuggestionCards = ({recipes}) =>{
@@ -21,7 +21,7 @@ export default function Suggestions() {
           recipes.map((e,i)=>(
             <div key={i} id={e.i} className={S.suggCard}>
               <img src={e.image}/>
-              <div>{e.title}</div>
+              <p>{e.title}</p>
             </div>
           ))
         }
@@ -30,10 +30,13 @@ export default function Suggestions() {
   }
   const DietCards = ({diets}) =>{
     return(
+      
       <ul className={S.contDietsCards}>
         {
           diets.map((e,i)=>(
-            <li key={i} name={e.name} style={{color:e.color}} className={S.dietCard}>{e.text}</li>
+            <li key={i} name={e.name} style={{color:'white',backgroundColor:e.color}} className={S.dietCard}>
+              <h1>{e.text}</h1>
+            </li>
           ))
         }
       </ul>
@@ -42,9 +45,9 @@ export default function Suggestions() {
   return (
     diets.length <1 && suggestions.length <1 ? <Loader className={S.loader}/> :
       <div className={S.container}>
-        <div className={S.title}>{suggestions[0].diet} {suggestions[0].meal}s suggestions</div>
+        <div className={S.title}>Suggestions:  {suggestions[0].diet} {suggestions[0].meal}s</div>
         <SuggestionCards recipes={suggestions}/>
-        <div className={S.title}>Recipes for diets</div>
+        <div className={S.title}>Recipes by diet</div>
         <DietCards diets={diets}/>
       </div>
   );

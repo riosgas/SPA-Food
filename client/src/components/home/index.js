@@ -7,22 +7,25 @@ import Suggestions from "./suggestions";
 import Recipes from "./recipes";
 
 export default function Home() {
-  let suggest = useSelector(state => state.home.suggest)
+  let {suggest} = useSelector((state) => state.home)
   let dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getRecipes());
+    //dispatch(getRecipes());
     dispatch(getDiets())
   },[]);
-
+  
+  console.log('cuerpo: ',suggest)
   return (
-    suggest ? 
+    !suggest ? 
       <div className={S.container}>
+        {console.log('recipes: ',suggest)}
         <Nav className={S.nav}/>
         <Recipes className={S.content}/>
       </div>
     :
       <div className={S.container}>
+        {console.log('sugges: ',suggest)}
         <Nav className={S.nav}/>
         <Suggestions className={S.content}/>
       </div>

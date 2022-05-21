@@ -5,11 +5,12 @@
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.18)
 }
 .Logo {
-    /* height: 160px; */
-    width: 110%;
+    max-height: 90%;
+    max-width: 90%;
     justify-self: center;
     align-self: center;
     mix-blend-mode: darken;
+    cursor: pointer;
 }
 .contButtons{
     /* background-color: rgb(240, 186, 186); */

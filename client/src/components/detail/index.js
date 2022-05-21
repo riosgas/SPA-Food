@@ -1,8 +1,8 @@
 import {React, useEffect} from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { getDetails } from '../../redux/actions';
-import S from "./home.module.css"
-import AllRecipes from "./allRecipes";
+import S from "./style.module.css"
+import Recipes from "../home/recipes";
 import Nav from "../navbar";
 
 export default function Home() {
@@ -10,13 +10,13 @@ export default function Home() {
   let dispatch = useDispatch();
 
   useEffect(() => {
-    !details && dispatch(getDiets())
+    !details && dispatch(getDetails())
   },[]);
 
   return (
     <div className={S.container}>
       <Nav className={S.nav}/>
-      <AllRecipes className={S.content}/>
+      <Recipes className={S.content}/>
     </div>
   );
 }
