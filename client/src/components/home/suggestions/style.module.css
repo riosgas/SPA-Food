@@ -78,6 +78,7 @@
     border-radius: 100%;
     overflow: auto;
     cursor: pointer;
+    color: white;
     box-shadow: 0 6px 16px rgba(0,0,0,0.2);
     display: grid;
     align-items: center;

@@ -7,7 +7,10 @@ import {
     GET_SUGGESTIONS,
     CREATE_RECIPE,
     CHANGE_PAGE,
-    CLEAN_DETAILS
+    CLEAN_DETAILS,
+    SET_SORT,
+    SET_FILTERED,
+    SET_CURRENT_PAGE
 } from'../actions'
 
 const initialState = {
@@ -20,11 +23,12 @@ const initialState = {
         recipes: []
     },
     sort:{
-        score:'',
         alpha:'',
-        diet:''
+        diet:'',
+        score:''
     },
-    suggestions:[]
+    suggestions:[],
+    filtered:[]
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -81,6 +85,28 @@ const rootReducer = (state = initialState, action) => {
             return{
                 ...state,
                 details: []
+            }
+        case SET_SORT:
+            let {name, value} = action.payload
+            return{
+                ...state,
+                sort: {
+                    ...state.sort,
+                    [name]: value
+                }
+            }
+        case SET_FILTERED:
+            return{
+                ...state,
+                filtered: action.payload
+            }
+        case SET_CURRENT_PAGE:
+            return{
+                ...state,
+                home: {
+                    ...state.home,
+                    currentPage: action.payload
+                }
             }
         default:
             return state;

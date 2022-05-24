@@ -1,7 +1,7 @@
 .container{
     background-color: lightgray;
     display: grid;
-    grid-template-rows: 150px 40px 60px;
+    grid-template-rows: 150px 40px 60px auto;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.18)
 }
 .Logo {
