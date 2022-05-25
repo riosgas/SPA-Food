@@ -84,6 +84,7 @@
 .field{
     /* background-color: #dfba81;
     border: 1px solid grey; */
+    box-sizing: border-box;
     padding: .5rem;
     margin: .5rem;
 }
@@ -169,6 +170,7 @@
     border: 2px solid red;
 }
 .fieldError {
+    box-sizing: border-box;
     border: 2px solid red;
     padding: .5rem;
     margin: .5rem;

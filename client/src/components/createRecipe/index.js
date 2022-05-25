@@ -1,6 +1,6 @@
 import {React, useEffect, useState} from "react";
 import { useDispatch, useSelector } from 'react-redux';
-//import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { getDiets, createRecipe } from '../../redux/actions';
 import S from "./style.module.css";
 import notfound from "../../images/default.jpg"
@@ -31,7 +31,7 @@ export default function CreateRecipe() {
   const regex = {
     title: /^[a-zA-ZÀ-ÿ\s]{1,100}$/,
     image: /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/,
-    summary: /^[a-z}A-Z0-9_.+-:;"'¿?¡!]+$/,
+    summary: /.*(?:)/,
     score: /^[1-9][0-9]?$|^100$/,
     healthScore: /^[1-9][0-9]?$|^100$/
   }
@@ -97,10 +97,23 @@ export default function CreateRecipe() {
     // score: false,
     // healthScore: false,
     // diets: false
-    if ( !hasError.title && !hasError.image && !hasError.summary && !hasError.score && !!hasError.healthScore){
-
+    if (!hasError.title && !hasError.image && !hasError.summary && !hasError.score && !hasError.healthScore) {
+      dispatch(createRecipe(input));
+      setInput({
+        title: '',
+        image: '',
+        summary:'',
+        steps:[''],
+        score:'',
+        healthScore:'',
+        diets:[]
+      })
+      alert('Success')
+    } else {
+      alert('Invalidad data')
     }
-
+    console.log(input);
+    console.log('errores: ',hasError)
     //dispatch(createRecipe(input));
   };
 
@@ -112,10 +125,13 @@ export default function CreateRecipe() {
     : 
     setInput({...input, diets: input.diets.filter(d => d !== e)});
 
-    if (input.diets.length != 0) {
+    if (input.diets.length == 0) {
       setHasError({...hasError, diets:false})
+    } else if (input.diets.length == 1 && input.diets[0] == e) {
+      setHasError({...hasError, diets:true})
     }
-    console.log(input.diets);
+
+    console.log(hasError);
   };
   
   const CompDiets = ({items}) => {
@@ -154,7 +170,7 @@ export default function CreateRecipe() {
       <div className={S.title}>
         <textarea
           name='title'
-          maxlength="100"
+          maxLength="100"
           value={input.title}
           placeholder='Title'
           onChange={onChange}
@@ -176,7 +192,7 @@ export default function CreateRecipe() {
           <h2>Score</h2>
           <input
             name='score'
-            maxlength="3"
+            maxLength="3"
             value={input.score}
             placeholder='Score'
             onChange={onChange}
@@ -188,7 +204,7 @@ export default function CreateRecipe() {
           <h2>Health Score</h2>
           <input
             name='healthScore'
-            maxlength="3"
+            maxLength="3"
             value={input.healthScore}
             placeholder='Healthy'
             onChange={onChange}
@@ -231,7 +247,7 @@ export default function CreateRecipe() {
       <div className={S.submit}>
         <button onClick={onSubmit}>Create recipe</button>
       </div>
-      {/* <Link className={S.close} to='/home'>X</Link> */}
+      <Link className={S.close} to='/home'>X</Link>
     </div>
     </div>
   );
