@@ -74,9 +74,13 @@ export function getSuggestions() {
     }
 
 }
-
-export function createRecipe() {
-    
+export function createRecipe(value) {
+    return function () {
+        axios.post('http://localhost:3001/recipes/', value)
+            .then((response) => {
+                return response.json;
+            })
+    }
 }
 export function changePage(value) {
     return function (dispatch){

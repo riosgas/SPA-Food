@@ -87,12 +87,20 @@ const rootReducer = (state = initialState, action) => {
                 details: []
             }
         case SET_SORT:
-            let {name, value} = action.payload
-            return{
-                ...state,
-                sort: {
-                    ...state.sort,
-                    [name]: value
+            let {name, value} = action.payload;
+            if (name === 'all') {
+                return {...state,
+                    sort: {
+                        alpha:'',
+                        diet:'',
+                        score:''
+                    }
+            }} else {
+                return {...state,
+                    sort: {
+                        ...state.sort,
+                        [name]: value
+                    }
                 }
             }
         case SET_FILTERED:

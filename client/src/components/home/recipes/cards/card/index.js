@@ -14,11 +14,20 @@ export default function Card({id, image, title, diets}) {
       <div className={S.title}>
         <p>{title}</p>
       </div>
+      {
+      // id.length > 15 ?
+      // <ul className={S.diets}>
+      //   {
+      //     diets && diets.map((e,i)=>(<li key={i} className={S.diet} style={{width:"minmax(auto, 480px)"}}>{e.name || 'nada'}</li>)) ||'nada'
+      //   }
+      // </ul>
+      // :
       <ul className={S.diets}>
         {
           diets && diets.map((e,i)=>(<li key={i} className={S.diet} style={{width:"minmax(auto, 480px)"}}>{e || 'nada'}</li>)) ||'nada'
         }
       </ul>
+      }
       {/* <div className={S.diets}>{diets}</div> */}
     </div>
   );

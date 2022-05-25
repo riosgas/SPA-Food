@@ -14,33 +14,47 @@ export default function Details() {
   useEffect(() => {
     dispatch(getDetails(id));
 
+    console.log('MOUUUUUNT y ',Object.keys(details).length)
     return () => {
       dispatch(cleanDetails())
     }
   },[]);
 
   return (
-    Object.keys(details).length < 1 ? <Loading className={S.container}/> :
+    details && Object.keys(details).length == 0 ? <Loading className={S.container}/> :
     <div className={S.all}>
+    {console.log('Aqui es: ',details)}
     <div className={S.container}>
       
       <img src={details.image} />
       <h1 className={S.title}>{details.title}</h1>
       <div className={S.properties}>
-        <h3>Dish type</h3>
-        <ul>
-        {details.dishTypes.map((t,i) => (
-          <li key={i}>{t}</li>
-        ))}
-        </ul>
-        <h3>Ready in {details.readyInMinutes} minutes</h3>
-        <h3>{details.servings} servings</h3>
-        <h3>Health score: {details.healthScore}%</h3>
+        { id.length < 15 && 
+        <div>
+          <h3>Dish type</h3>
+          <ul>
+          {details.dishTypes.map((t,i) => (
+            <li key={i}>{t}</li>
+          ))}
+          </ul>
+          <h3>Ready in {details.readyInMinutes} minutes</h3>
+          <h3>{details.servings} servings</h3>
+          <h3>Score: {details.healthScore}%</h3>
+        </div>
+        }
+        {id.length > 15 && <h3>Score: {details.score}%</h3>}
         <h3>Diets</h3>
         <ul>
-        {details.diets.map((d,i) => (
-          <li key={i}>{d}</li>
-        ))}
+        {
+          id.length < 15 ?
+          details.diets.map((d,i) => (
+            <li key={i}>{d}</li>
+          ))
+          :
+          details.diets.map((d,i) => (
+            <li key={i}>{d.name}</li>
+          ))
+        }
         </ul>
       </div>
       <div className={S.text}>
@@ -48,8 +62,17 @@ export default function Details() {
         <div dangerouslySetInnerHTML={{ __html: details.summary }}></div>
         {/* <div>{details.summary}</div> */}
         <h2>Instructions</h2>
+
           {
-            details.analyzedInstructions.length===0 ? <p>{details.instructions}</p> :
+            details.steps ?
+            <ol>
+            {
+              details.steps.map((s,i) => (
+                <li key={i}>{s}</li>
+              ))
+            }
+            </ol>
+            : details.analyzedInstructions.length===0 ? <p>{details.instructions}</p> :
             <ol>
             {
               details.analyzedInstructions[0].steps.map((s,i) => (

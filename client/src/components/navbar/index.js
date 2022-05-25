@@ -21,8 +21,7 @@ export default function Nav() {
   function allRecipes() {
     suggestPage ? dispatch(changePage(false)) : dispatch(changePage(true));
     dispatch(getRecipes());
-    dispatch(setSort('alpha', ''));
-    dispatch(setSort('diet', ''));
+    dispatch(setSort('all'));
   }
   const onChange = (e) => {
     let {name, value} = e.target;
@@ -35,6 +34,10 @@ export default function Nav() {
     e.preventDefault();
     dispatch(getRecipes(search));
     dispatch(changePage(false))
+  }
+  const resetSort = () => {
+    //e.preventDefault();
+    dispatch(setSort('all'));
   }
 
   return (
@@ -69,6 +72,7 @@ export default function Nav() {
               ))
             }
           </select>
+          <button onClick={resetSort}>Reset options</button>
         </div>
       }
     </div>

@@ -16,7 +16,7 @@ export default function LandingPage() {
       <img src={image2} className={S.img2}/>
       <img src={image3} className={S.img3}/>
       <div className={S.intro}>
-        <h1>Welcome to my site!</h1>
+        <h1>Welcome!</h1>
         <Link className={S.link} to='/home'><button className={S.enter}>Go!</button></Link>
       </div>
     </div>
