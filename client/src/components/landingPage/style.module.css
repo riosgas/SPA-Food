@@ -25,10 +25,19 @@
 }
 .intro h1{
     font-size: 4rem;
+    justify-self: center;
+}
+.intro img{
+    max-width: 80%;
+    width: 40rem;
+    top: -10rem;
+    position: relative;
+    justify-self: center;
 }
 .link {
     /* background-color: aquamarine; */
     display: grid;justify-items: center;
+    text-decoration: none;
 }
 .enter{
     font-size: 3rem;

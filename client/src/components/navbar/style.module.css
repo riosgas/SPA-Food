@@ -5,12 +5,6 @@
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.18);
     height: 100vh;
 }
-.create:last-child{
-    grid-row: 5;
-    align-self: end;
-    margin-bottom: 1em;
-    font-size: 2rem;
-}
 .Logo {
     max-height: 75%;
     max-width: 70%;
@@ -32,23 +26,44 @@
     text-align: center;
     justify-self: center;
 }
+.allRecipes {
+    width: auto;
+    height: 2.5rem;
+    text-align: center;
+    justify-self: center;
+    align-self: end;
+}
+.allRecipes:last-child{
+    grid-row: 5;
+    margin-bottom: 1em;
+}
 .contSearch{
-    background-color: rgb(186, 240, 207);
+    /* background-color: rgb(186, 240, 207); */
     padding: 1rem;
     justify-self: center;
     align-self: center;
 }
-.searchOff{
-    height: 0%;
-    overflow: hidden;
+.contSort {
+    display: grid;
+    gap: 1rem;
+}
+.contSort select{
+    display: block;
+    justify-self: center;
+}
+.contSort button{
+    display: block;
+    justify-self: center;
+    width: auto;
 }
 
 @media screen and (max-width: 1580px) {
     .container{
         background-color: lightgray;
-        grid-template-columns: 200px 100px auto;
+        grid-template-columns: 200px 100px auto auto 100px;
         grid-template-rows: 100px;
-        box-shadow: 0 0px 20px 0 rgba(0, 0, 0, 0.18)
+        box-shadow: 0 0px 20px 0 rgba(0, 0, 0, 0.18);
+        height: 100px;
     }
     .Logo {
         width: 110%;
@@ -61,5 +76,24 @@
         align-items: center;
     }
     .contSearch{
+        justify-self: start;
+    }
+
+    .contSort {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(5, 1fr);
+        align-items: center;
+    }
+    .create{
+        align-self: center;
+    }
+    .allRecipes{
+        align-self: center;
+    }
+    .allRecipes:last-child{
+        grid-row: 1;
+        grid-column: 5;
+        margin-bottom: 0;
     }
 }

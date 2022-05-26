@@ -16,30 +16,31 @@ export default function Nav() {
     diets.length === 0 && dispatch(getDiets())
   },[]);
 
-  const allRecipes = () => {
-    //suggestPage ? dispatch(changePage(false)) : dispatch(changePage(true));
-    dispatch(changePage(false));
-    dispatch(getRecipes());
-    dispatch(setSort('all'));
-  }
   const pageSuggest = () => {
     dispatch(changePage(true));
-    dispatch(getSuggestions())
-  }
-  const onChange = (e) => {
-    let {name, value} = e.target;
-    dispatch(setSort(name, value));
+    dispatch(getSuggestions());
+    dispatch(setSort('all'));
   }
   const onChangeSearch = (e) => {
     setSearch(e.target.value);
   }
   const clickSearch = (e) => {
-    //e.preventDefault();
+    e.preventDefault();
     setSearch('');
     dispatch(getRecipes(search));
     dispatch(changePage(false))
   }
+  const onChange = (e) => {
+    let {name, value} = e.target;
+    dispatch(setSort(name, value));
+  }
   const resetSort = () => {
+    dispatch(setSort('all'));
+  }
+  const allRecipes = () => {
+    //suggestPage ? dispatch(changePage(false)) : dispatch(changePage(true));
+    dispatch(changePage(false));
+    dispatch(getRecipes());
     dispatch(setSort('all'));
   }
 
@@ -49,13 +50,14 @@ export default function Nav() {
       <input onClick={() => navigate('/recipe/create')} type='button' value='Create' className={S.create}/>
       {/* <div className={S.contButtons}>
       </div> */}
-      <div className={S.contSearch}>
+      <form className={S.contSearch} onSubmit={clickSearch}>
 				{/* <label>Search recipe</label> */}
         <input type="text" name='search' value={search} onChange={onChangeSearch}/>
-        <button onClick={clickSearch}>search</button>
-      </div>
-      { !home.suggest && home.recipes.length &&
-        <div>
+        <input type='submit' value='search'/>
+      </form>
+      { 
+        !home.suggest && home.recipes.length &&
+        <div className={S.contSort}>
           <select name='alpha' onChange={onChange} value={sort.alpha}>
             <option defaultValue value=''>Sort alphabetically</option>
             <option value="A-Z">A-Z</option>
@@ -77,7 +79,7 @@ export default function Nav() {
           <button onClick={resetSort}>Reset options</button>
         </div>
       }
-      <input onClick={allRecipes} type='button' value='All recipes' className={S.create}/>
+      <input onClick={allRecipes} type='button' value='All recipes' className={S.allRecipes}/>
     </div>
   );
 }

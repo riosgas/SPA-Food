@@ -16,12 +16,12 @@ export default function CreateRecipe() {
     diets:[]
   });
   const [hasError,setHasError] = useState({
-    title: true,
-    image: true,
-    summary: true,
+    title: false,
+    image: false,
+    summary: false,
     steps: false,
-    score: true,
-    healthScore: true,
+    score: false,
+    healthScore: false,
     diets: false
   })
   const {diets} = useSelector(state => state);
@@ -31,7 +31,7 @@ export default function CreateRecipe() {
   const regex = {
     title: /^[a-zA-ZÀ-ÿ\s]{1,100}$/,
     image: /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/,
-    summary: /.*(?:)/,
+    summary: /^.{1,250}$/,
     score: /^[1-9][0-9]?$|^100$/,
     healthScore: /^[1-9][0-9]?$|^100$/
   }
@@ -54,18 +54,21 @@ export default function CreateRecipe() {
     console.log(hasError)
   };
   const onChangeStep = (e) => {
-    let newSteps = input.steps;
+    let newSteps = [...input.steps];
     newSteps[e.target.name] = e.target.value;
     setInput({
       ...input,
     steps : newSteps
     });
     
-    if (input.steps[0] != '') {
+    let filterSteps = newSteps.filter(e => e !== '');
+    if (filterSteps.length === 0) {
+      setHasError({...hasError, steps:true})
+    } else {{
       setHasError({...hasError, steps:false})
-    }
+    }}
     
-    console.log(input.steps,'index: ',e.target.name);
+    //console.log(input.steps,'index: ',e.target.name);
   };
   const modSteps = (e) => {
     e.preventDefault();
@@ -78,27 +81,35 @@ export default function CreateRecipe() {
     }
   };
 
-  // const addStep = (e) => {
-  //   e.preventDefault();
-  //   setInput({...input, steps: [...input.steps, '']})
-  // };
-  // const removeStep = (e) => {
-  //   e.preventDefault();
-  //   let newSteps = input.steps;
-  //   newSteps.pop();
-  //   setInput({...input, steps: newSteps})
-  // };
-
   const onSubmit = (e) => {
-    // title: false,
-    // image: false,
-    // summary: false,
-    // steps: false,
-    // score: false,
-    // healthScore: false,
-    // diets: false
-    if (!hasError.title && !hasError.image && !hasError.summary && !hasError.score && !hasError.healthScore) {
-      dispatch(createRecipe(input));
+    let errorFlag = false;
+    let newErrors = {};
+    let newSteps = input.steps.filter(e => e !== '');
+    console.log('newSteps: ',newSteps);
+    for (const key in input) {
+      if (typeof input[key] === 'string'){
+
+        if (regex[key].test(input[key])){
+          newErrors = {...newErrors, [key]:false}
+        } else {
+          newErrors = {...newErrors, [key]:true};
+          errorFlag = true;
+        }
+
+      } else {
+        if (input[key].length === 0 || newSteps.length === 0) {
+          //(input[key].length === 1 && input[key][0] === '')
+          console.log(key,': ',input[key])
+          newErrors = {...newErrors,[key]:true}
+          //setHasError({...hasError, [key]:true});
+          errorFlag = true;
+        }
+      }
+    }
+    setHasError(newErrors);
+
+    if (!errorFlag){
+      dispatch(createRecipe({...input, steps: newSteps}));
       setInput({
         title: '',
         image: '',
@@ -110,11 +121,12 @@ export default function CreateRecipe() {
       })
       alert('Success')
     } else {
-      alert('Invalidad data')
+    
+    alert('Invalidad data')
     }
+    
     console.log(input);
     console.log('errores: ',hasError)
-    //dispatch(createRecipe(input));
   };
 
   const selDiet = (e) => {
@@ -145,25 +157,13 @@ export default function CreateRecipe() {
       </div>
     )
   }
-  // const checkValue = (e) => {
-  //   //let {value, name} = e.target;
-  //   if (input[e] != '' && !regex[e].test(input[e])){
-  //     return S.inputError
-  //   }
-  // }
-  // const checkError = (e) => {
-  //   if (input[e] != '' && !regex[e].test(input[e])){
-  //     return S.textError
-  //   }
-  // }
 
   return (
-    // Object.keys(details).length < 1 ? <Loading className={S.container}/> :
     <div className={S.all}>
     <div className={S.container}>
       <div className={S.image}>
         <img src={input.image} alt='Recipe' onError={(e)=>{
-          e.target.onerror = null
+          e.target.onerror = null;
           e.target.src = notfound}} 
         />
       </div>
@@ -174,17 +174,17 @@ export default function CreateRecipe() {
           value={input.title}
           placeholder='Title'
           onChange={onChange}
-          className={hasError.title && input.title!='' ? `${S.titleOk} ${S.inputError}` : S.titleOk}
+          className={hasError.title ? `${S.titleOk} ${S.inputError}` : S.titleOk}
         />
-        <div className={hasError.title && input.title!='' ? S.textError : S.textOk} >Only letters are allowed, up to 100 characters</div>
+        <div className={hasError.title ? S.textError : S.textOk} >Only letters are allowed, up to 100 characters</div>
 
-        <div className={hasError.image && input.image!='' ? S.textError : S.textOk} >Invalid URL</div>
+        <div className={hasError.image ? S.textError : S.textOk} >Invalid URL</div>
         <input
           name='image'
           value={input.image}
           placeholder='Image URL'
           onChange={onChange}
-          className={hasError.image && input.image!='' ? `${S.imageOk} ${S.inputError}` : S.imageOk}
+          className={hasError.image ? `${S.imageOk} ${S.inputError}` : S.imageOk}
         />
       </div>
       <div className={S.properties}>
@@ -196,9 +196,9 @@ export default function CreateRecipe() {
             value={input.score}
             placeholder='Score'
             onChange={onChange}
-            className={hasError.score && input.score!='' ? S.inputError : ''}
+            className={hasError.score ? S.inputError : ''}
           />
-          <div className={hasError.score && input.score!='' ? S.textError:S.textOk} >Number between 0 and 100</div>
+          <div className={hasError.score ? S.textError:S.textOk} >Number between 0 and 100</div>
         </div>
         <div className={S.field}>
           <h2>Health Score</h2>
@@ -208,9 +208,9 @@ export default function CreateRecipe() {
             value={input.healthScore}
             placeholder='Healthy'
             onChange={onChange}
-            className={hasError.healthScore && input.healthScore!='' ? S.inputError : ''}
+            className={hasError.healthScore ? S.inputError : ''}
           />
-          <div className={hasError.healthScore && input.healthScore!='' ? S.textError:S.textOk} >Number between 0 and 100</div>
+          <div className={hasError.healthScore ? S.textError:S.textOk} >Number between 0 and 100</div>
         </div>
         <div className={hasError.diets ? S.fieldError : S.field}>
           <h2>Diets</h2>
@@ -222,12 +222,13 @@ export default function CreateRecipe() {
           <h2>Summary</h2>
           <textarea
             name='summary'
+            maxLength="250"
             value={input.summary}
             placeholder='Summary'
             onChange={onChange}
-            className={hasError.summary && input.summary!='' ? S.inputError : ''}
+            className={hasError.summary ? S.inputError : ''}
           />
-          <div className={hasError.summary && input.summary!='' ? S.textError:S.textOk} >Up to 255 characters</div>
+          <div className={hasError.summary ? S.textError:S.textOk} >Up to 255 characters</div>
         </div>
         <div className={hasError.steps ? S.fieldError : S.field}>
           <h2>Preparation steps</h2>

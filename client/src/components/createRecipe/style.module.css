@@ -72,6 +72,7 @@
     text-align: center;
     height: 2.5em;
     resize: none;
+    border-radius: .6em;
 }
 .imageOk{
     background-color: rgba(255, 255, 255, 0.7);
@@ -80,13 +81,29 @@
     height: 2.5em;
     resize: none;
     width: 80%;
+    border-radius: .6em;
 }
 .field{
     /* background-color: #dfba81;
     border: 1px solid grey; */
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
     padding: .5rem;
     margin: .5rem;
+    border: 2px solid rgba(0, 0, 0, 0);
+    border-radius: .6em;
+}
+.fieldError {
+    /* box-sizing: border-box; */
+    padding: .5rem;
+    margin: .5rem;
+    border: 2px solid rgba(255, 0, 0, 0);
+    box-shadow: 0 0 10px 2px rgba(255, 0, 0, 0.3);
+    border-radius: .6em;
+    /* background-color: rgba(255, 0, 0, 0.3); */
+}
+.fieldError h2 {
+    font-size: 1.5rem;
+    margin-top: 0em;
 }
 .text{
 }
@@ -168,12 +185,7 @@
 }
 .inputError {
     border: 2px solid red;
-}
-.fieldError {
-    box-sizing: border-box;
-    border: 2px solid red;
-    padding: .5rem;
-    margin: .5rem;
+    border-radius: .4em;
 }
 
 .inputError:focus {
