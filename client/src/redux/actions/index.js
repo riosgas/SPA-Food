@@ -12,12 +12,12 @@ export const SET_SORT = 'SET_SORT';
 export const SET_FILTERED = 'SET_FILTERED';
 export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 
-const HOST = 'spa-food-production.up.railway.app';
+const HOST = 'https://spa-food-production.up.railway.app';
 
 export function getDiets(query) {
   return function (dispatch){
     
-      axios.get(`http://${HOST}/types/`)
+      axios.get(`${HOST}/types/`)
         .then(response => {
           return dispatch({ type: GET_DIETS, payload: response.data });
         })
@@ -27,21 +27,21 @@ export function getDiets(query) {
 export function getRecipes(query, diet){
   return function (dispatch) {
     if (diet) {
-      axios.get(`http://${HOST}/recipes?diet=${diet}`)
+      axios.get(`${HOST}/recipes?diet=${diet}`)
         .then(response => {
           return dispatch({ type: GET_RECIPES_QUERY, payload: {query: diet, data:response.data}})
         })
         .catch(error => console.log(error));
     } else
     if (query) {
-      axios.get(`http://${HOST}/recipes?name=${query}`)
+      axios.get(`${HOST}/recipes?name=${query}`)
         .then(response => {
           return dispatch({ type: GET_RECIPES_QUERY, payload: {query: query, data:response.data}})
         })
         .catch(error => console.log(error));
     }
     else if (!query && !diet) {
-      axios.get(`http://${HOST}/recipes/`)
+      axios.get(`${HOST}/recipes/`)
         .then(response => {
           return dispatch({ type: GET_RECIPES, payload: response.data });
         })
@@ -51,7 +51,7 @@ export function getRecipes(query, diet){
 }
 export function getDetails(id) {
   return function (dispatch){
-    axios.get(`http://${HOST}/recipes/${id}`)
+    axios.get(`${HOST}/recipes/${id}`)
       .then(response => {
         return dispatch({ type: GET_DETAILS, payload: response.data });
       })
@@ -60,7 +60,7 @@ export function getDetails(id) {
 }
 export function getSuggestions() {
   return function (dispatch){
-    axios.get(`http://${HOST}/suggestions/`)
+    axios.get(`${HOST}/suggestions/`)
       .then(response => {
         return dispatch({ type: GET_SUGGESTIONS, payload: response.data });
       })
@@ -70,7 +70,7 @@ export function getSuggestions() {
 }
 export function createRecipe(value) {
   return function () {
-    axios.post(`http://${HOST}/recipes/${value}`)
+    axios.post(`${HOST}/recipes/${value}`)
       .then((response) => {
         return response.json;
       })
