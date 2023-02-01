@@ -14,7 +14,7 @@ export default function Details() {
   useEffect(() => {
     dispatch(getDetails(id));
 
-    console.log('MOUUUUUNT y ',Object.keys(details).length)
+    //console.log('MOUUUUUNT y ',Object.keys(details).length)
     return () => {
       dispatch(cleanDetails())
     }
@@ -23,7 +23,7 @@ export default function Details() {
   return (
     details && Object.keys(details).length == 0 ? <Loading className={S.container}/> :
     <div className={S.all}>
-    {console.log('Aqui es: ',details)}
+      
     <div className={S.container}>
       
       <img src={details.image} />

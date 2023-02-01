@@ -77,7 +77,7 @@ router.get('/:id', async (req, res, next) => {
     } else {
       //console.log('d')
       let recipeDetail = await Recipe.findByPk(reqId, {include: Diet});
-      console.log('DETAIL es ', recipeDetail)
+      //console.log('DETAIL es ', recipeDetail)
       return res.send(recipeDetail);
     }
   } catch (error) {
@@ -86,7 +86,7 @@ router.get('/:id', async (req, res, next) => {
 })
 
 router.post('/', async (req, res, next) => {
-  console.log('ESTO ES BODY: ', req.body);
+  //console.log('ESTO ES BODY: ', req.body);
   let { title, image, summary, diets, score, healthScore, steps } = req.body;
   try {
     let newRecipe = await Recipe.create({
